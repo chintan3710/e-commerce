@@ -16,6 +16,11 @@ const typeSchema = mongoose.Schema({
         ref: "ExtraCategory",
         required: true,
     },
+    brand: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Brand",
+        required: true,
+    },
     type: {
         type: String,
         required: true,

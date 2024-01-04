@@ -4,6 +4,8 @@ const ExtraCategory = require("../models/ExtraCategory");
 
 const Subcategory = require("../models/Subcategory");
 
+const Brand = require("../models/Brand");
+
 const Type = require("../models/Type");
 
 module.exports.add_type = async (req, res) => {
@@ -11,10 +13,12 @@ module.exports.add_type = async (req, res) => {
         let categoryData = await Category.find({});
         let subcategoryData = await Subcategory.find({});
         let extraCategoryData = await ExtraCategory.find({});
+        let brandData = await Brand.find({});
         return res.render("admin/add_type", {
             categoryData: categoryData,
             subcategoryData: subcategoryData,
             extraCategoryData: extraCategoryData,
+            brandData: brandData,
         });
     } catch (err) {
         console.log(err);
@@ -67,6 +71,7 @@ module.exports.view_type = async (req, res) => {
         let typeData = await Type.find({
             $or: [{ type: { $regex: ".*" + search + ".*", $options: "i" } }],
         })
+            .populate("brand")
             .populate("extraCategory")
             .populate("subcategory")
             .populate("category")
