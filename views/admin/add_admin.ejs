@@ -1,0 +1,136 @@
+<link rel="stylesheet" href="/vendor/libs/quill/katex.css">
+<link rel="stylesheet" href="/vendor/libs/quill/editor.css">
+<link rel="stylesheet" href="/vendor/libs/select2/select2.css">
+<link rel="stylesheet" href="/vendor/libs/dropzone/dropzone.css">
+<link rel="stylesheet" href="/vendor/libs/flatpickr/flatpickr.css">
+<link rel="stylesheet" href="/vendor/libs/tagify/tagify.css" />
+
+<%- include('admin_header') %>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+        
+          <div class="container-xxl flex-grow-1 container-p-y">
+            
+            
+
+<h4 class="py-3 mb-4">
+  <span class="text-muted fw-light">eCommerce /</span><span class="text-muted fw-light"> Admin /</span><span> Add Admin</span>
+</h4>
+
+<div class="app-ecommerce">
+
+  <!-- Add Admin -->
+
+  <div class="row">
+
+    <!-- First column-->
+    <div class="col-12 col-lg-12">
+      <!-- Product Information -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-tile mb-0">Admin information</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" action="/admin/insertAdminData" enctype="multipart/form-data">
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-floating form-floating-outline">
+                  <input class="form-control" type="text" placeholder="Enter first name" id="html5-text-input" name="fname" />
+                  <label for="html5-text-input">First Name</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating form-floating-outline">
+                  <input class="form-control" type="text" placeholder="Enter last name" id="html5-text-input" name="lname" />
+                  <label for="html5-text-input">Last Name</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-floating form-floating-outline mb-4">
+              <input class="form-control" type="email" placeholder="Enter email" id="html5-email-input" name="email" />
+              <label for="html5-email-input">Email</label>
+            </div>
+            <div class="form-floating form-floating-outline mb-4">
+              <input class="form-control" type="password" placeholder="password" id="html5-password-input" name="password" />
+              <label for="html5-password-input">Password</label>
+            </div>
+            <div class="form-floating form-floating-outline mb-4">
+              <textarea class="form-control h-px-100" id="exampleFormControlTextarea1" placeholder="Description here..." name="description"></textarea>
+              <label for="exampleFormControlTextarea1">Description</label>
+            </div>
+            <div class="mb-4">
+              <p class="text-light fw-medium">Gender:</p>
+              <div class="ms-4">
+                <input name="gender" class="form-check-input" type="radio" value="male" id="male" />
+                <label class="form-check-label me-2" for="male">
+                  Male
+                </label>
+                <input name="gender" class="form-check-input" type="radio" value="female" id="female" />
+                <label class="form-check-label" for="female">
+                  Female
+                </label>
+              </div>
+            </div>
+            <div class="mb-4">
+              <p class="text-light fw-medium">Hobby:</p>
+              <div class="ms-4">
+                <input name="hobby" class="form-check-input" type="checkbox" value="playing" id="playing" />
+                <label class="form-check-label me-2" for="playing">
+                  Playing
+                </label>
+                <input name="hobby" class="form-check-input" type="checkbox" value="music" id="music" />
+                <label class="form-check-label me-2" for="music">
+                  Music
+                </label>
+                <input name="hobby" class="form-check-input" type="checkbox" value="dancing" id="dancing" />
+                <label class="form-check-label" for="dancing">
+                  Dancing
+                </label>
+              </div>
+            </div>
+            <% let city = ["Surat", "Ahmedabad", "Rajkot", "Gandhinagar", "Vadodara"] %>
+            <div class="mb-4">
+              <p class="text-light fw-medium">Select City:</p>
+              <select class="form-select form-select-lg" name="city">
+                <option disabled selected>-- Select city --</option>
+                <% city.map((v, i)=>{ %>
+                  <option value="<%= v %>"><%= v %></option>
+                <% }); %>
+              </select>
+            </div>
+            <div class="dropzone needsclick mb-4" id="dropzone-basic">
+              <div class="dz-message needsclick my-5" id="isUploadText">
+                Drag and drop your image here
+                <small class="text-muted d-block fs-6 my-2">or</small>
+                <span class="needsclick btn btn-outline-primary d-inline-block" id="btnBrowse">Browse image</span>
+              </div>
+              <div class="fallback">
+                <input name="adminImage" type="file" class="position-absolute top-0 start-0 bottom-0 end-0 opacity-0 cursor-pointer" id="upload-img" />
+              </div>
+            </div>
+            <div class="mb-0">
+              <button class="btn btn-primary" type="submit" >Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /Product Information -->
+    </div>
+    <!-- /Second column -->
+
+    
+  </div>
+</div>
+          </div>
+          <!-- / Content -->
+          <script>
+            let uploadImg = document.getElementById("upload-img");
+            let msg = "";
+            uploadImg.addEventListener("change", () => {
+              msg = "Image Uploaded Successfully <div class='my-2'></div> <span class='needsclick btn btn-outline-primary d-inline-block' id='btnBrowse'>Change image</span>";
+              document.getElementById("isUploadText").innerHTML = msg;
+            });
+          </script>
+<%- include('admin_footer') %>

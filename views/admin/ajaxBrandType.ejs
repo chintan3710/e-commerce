@@ -1,0 +1,22 @@
+<div class="row mb-3">
+    <label class="col-sm-2 col-form-label form-label" for="Brand Name">Brand Name:</label>
+    <div class="col-sm-10">
+      <select id="Brand Name" class="form-select form-select" name="brand">
+        <option selected="" disabled="">-- Select brand --</option>
+        <% for(let brand of brandData){ %>
+          <option value="<%= brand.id %>"><%= brand.brand_name %></option>
+        <% } %>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label class="col-sm-2 col-form-label form-label" for="Type">Type:</label>
+    <div class="col-sm-10">
+      <select id="Type" class="form-select form-select" name="type">
+        <option selected="" disabled="">-- Select type --</option>
+        <% for(let type of typeData){ %>
+          <option value="<%= type.id %>"><%= type.type %></option>
+        <% } %>
+      </select>
+    </div>
+  </div>

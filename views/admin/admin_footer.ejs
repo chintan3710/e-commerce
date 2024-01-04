@@ -1,0 +1,133 @@
+
+
+<!-- Footer -->
+<footer class="content-footer footer bg-footer-theme">
+  <div class="container-xxl">
+    <div class="footer-container d-flex align-items-center justify-content-between py-3 flex-md-row flex-column">
+      <div class="text-body mb-2 mb-md-0">
+        © <script>document.write(new Date().getFullYear())</script>, made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span> by <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+      </div>
+      <div class="d-none d-lg-inline-block">
+        
+        <a href="https://themeselection.com/license/" class="footer-link me-3" target="_blank">License</a>
+        <a href="https://themeselection.com/" target="_blank" class="footer-link me-3">More Themes</a>
+        
+        <a href="https://demos.themeselection.com/materio-bootstrap-html-admin-template/documentation/" target="_blank" class="footer-link me-3">Documentation</a>
+        
+        
+        <a href="https://themeselection.com/support/" target="_blank" class="footer-link d-none d-sm-inline-block">Support</a>
+        
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- / Footer -->
+
+          
+          <div class="content-backdrop fade"></div>
+        </div>
+        <!-- Content wrapper -->
+      </div>
+      <!-- / Layout page -->
+    </div>
+
+    
+    
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+    
+    
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
+    
+  </div>
+  <!-- / Layout wrapper -->
+
+  
+  
+
+  <!-- Core JS -->
+  <!-- build:js assets/vendor/js/core.js -->
+  <script src="/vendor/libs/jquery/jquery.js"></script>
+  <script src="/vendor/libs/popper/popper.js"></script>
+  <script src="/vendor/js/bootstrap.js"></script>
+  <script src="/vendor/libs/node-waves/node-waves.js"></script>
+  <script src="/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="/vendor/libs/hammer/hammer.js"></script>
+  <script src="/vendor/libs/i18n/i18n.js"></script>
+  <script src="/vendor/libs/typeahead-js/typeahead.js"></script>
+  <script src="/vendor/js/menu.js"></script>
+  
+  <!-- endbuild -->
+
+  <!-- Vendors JS -->
+  <script src="/vendor/libs/apex-charts/apexcharts.js"></script>
+
+  <!-- Main JS -->
+  <script src="/js/main.js"></script>
+  
+
+  <!-- Page JS -->
+  <script src="/js/app-ecommerce-dashboard.js"></script>
+  
+</body>
+
+</html>
+
+<!-- beautify ignore:end -->
+
+<script>
+  let getSubcatData = () => {
+    let catData = document.getElementById("Category").value;
+    $.ajax({
+      url: "/admin/extraCategory/getSubcategory",
+      method: "post",
+      data: {
+        catData: catData
+      },
+      success: (res) => {
+        $("#Subcategory").html(res);
+      }
+    })
+  };
+
+  let getExtraCatData = () => {
+    let catData = document.getElementById("Category").value;
+    let subcatData = document.getElementById("Subcategory").value;
+    $.ajax({
+      url: "/admin/extraCategory/getExtraCategory",
+      method: "post",
+      data: {
+        catData: catData,
+        subcatData: subcatData
+      },
+      success: (res) => {
+        $("#ExtraCategory").html(res);
+      }
+    })
+  };
+
+  let getBrandTypeData = () => {
+    let catData = document.getElementById("Category").value;
+    let subcatData = document.getElementById("Subcategory").value;
+    let extraCatData = document.getElementById("ExtraCategory").value;
+    $.ajax({
+      url: "/admin/extraCategory/getBrandType",
+      method: "post",
+      data: {
+        catData: catData,
+        subcatData: subcatData,
+        extraCatData: extraCatData
+      },
+      success: (res) => {
+        $("#BrandType").html(res);
+      }
+    })
+  };
+  
+  $(document).ready(function () {
+      $("#selectAll").click(function () {
+          $(".checkboxSub").attr('checked', this.checked);
+      });
+  });
+</script>

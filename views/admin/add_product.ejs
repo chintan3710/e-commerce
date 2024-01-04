@@ -1,0 +1,201 @@
+<link rel="stylesheet" href="/vendor/libs/quill/katex.css">
+<link rel="stylesheet" href="/vendor/libs/quill/editor.css">
+<link rel="stylesheet" href="/vendor/libs/select2/select2.css">
+<link rel="stylesheet" href="/vendor/libs/dropzone/dropzone.css">
+<link rel="stylesheet" href="/vendor/libs/flatpickr/flatpickr.css">
+<link rel="stylesheet" href="/vendor/libs/tagify/tagify.css" />
+
+<%- include('admin_header') %>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+        
+          <div class="container-xxl flex-grow-1 container-p-y">
+            
+            
+
+<h4 class="py-3 mb-4">
+  <span class="text-muted fw-light">eCommerce /</span><span class="text-muted fw-light"> Product /</span><span> Add Product</span>
+</h4>
+
+<div class="app-ecommerce">
+
+  <!-- Add Admin -->
+
+  <div class="row">
+
+    <!-- First column-->
+    <div class="col-12 col-lg-12">
+      <!-- Product Information -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-tile mb-0">Product information</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" action="/admin/product/insertProductData" enctype="multipart/form-data">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label form-label" for="Category">Category:</label>
+                <div class="col-sm-10">
+                  <select id="Category" class="form-select form-select" onchange="return getSubcatData()" name="category">
+                    <option selected="" disabled="">-- Select Category --</option>
+                        <% for(let category of categoryData){ %>
+                            <option value="<%= category.id %>"><%= category.category_name %></option>
+                        <% } %>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label form-label" for="Subcategory">Subcategory:</label>
+                <div class="col-sm-10">
+                  <select id="Subcategory" class="form-select form-select" onchange="return getExtraCatData()" name="subcategory">
+                    <option selected="" disabled="">-- Select Subcategory --</option>
+                    <% for(let subcategory of subcategoryData){ %>
+                      <option value="<%= subcategory.id %>"><%= subcategory.subcategory_name %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label form-label" for="ExtraCategory">Extra Category:</label>
+                <div class="col-sm-10">
+                  <select id="ExtraCategory" class="form-select form-select" onchange="return getBrandTypeData()" name="extraCategory">
+                    <option selected="" disabled="">-- Select Extra Category --</option>
+                    <% for(let extraCategory of extraCategoryData){ %>
+                      <option value="<%= extraCategory.id %>"><%= extraCategory.extraCategory_name %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+              <div id="BrandType">
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label form-label" for="Brand Name">Brand Name:</label>
+                  <div class="col-sm-10">
+                    <select id="Brand Name" class="form-select form-select" name="brand">
+                      <option selected="" disabled="">-- Select brand --</option>
+                      <% for(let brand of brandData){ %>
+                        <option value="<%= brand.id %>"><%= brand.brand_name %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-2 col-form-label form-label" for="Type">Type:</label>
+                  <div class="col-sm-10">
+                    <select id="Type" class="form-select form-select" name="type">
+                      <option selected="" disabled="">-- Select type --</option>
+                      <% for(let type of typeData){ %>
+                        <option value="<%= type.id %>"><%= type.type_name %></option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_title">Product Title:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="basic-default-product_title" placeholder="Enter Product Title" name="product_title" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_price">Product Price:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="basic-default-product_price" placeholder="Enter Product Price" name="product_price" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_old_price">Product Old Price:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="basic-default-product_old_price" placeholder="Enter Product Old Price" name="product_old_price" />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_color">Product Color:</label>
+              <div class="col-sm-10" style="padding: calc(0.5rem + 1px) calc(var(--bs-gutter-x)*.5);">
+                <input name="product_color" class="form-check-input" type="checkbox" value="black" id="black">
+                <label class="form-check-label me-2" for="black">Black</label>
+                <input name="product_color" class="form-check-input" type="checkbox" value="red" id="red">
+                <label class="form-check-label me-2" for="red">Red</label>
+                <input name="product_color" class="form-check-input" type="checkbox" value="blue" id="blue">
+                <label class="form-check-label" for="blue">Blue</label>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_size">Product Size:</label>
+              <div class="col-sm-10" style="padding: calc(0.5rem + 1px) calc(var(--bs-gutter-x)*.5);">
+                <input name="product_size" class="form-check-input" type="checkbox" value="6" id="6">
+                <label class="form-check-label me-2" for="6">6</label>
+                <input name="product_size" class="form-check-input" type="checkbox" value="7" id="7">
+                <label class="form-check-label me-2" for="7">7</label>
+                <input name="product_size" class="form-check-input" type="checkbox" value="8" id="8">
+                <label class="form-check-label" for="8">8</label>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-description">Product Description:</label>
+              <div class="col-sm-10">
+                <textarea class="form-control h-px-100" id="basic-default-description" placeholder="Description here..." name="description"></textarea>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_image">Product Image:</label>
+              <div class="col-sm-10">
+                <div class="dropzone needsclick mb-4" id="dropzone-basic">
+                  <div class="dz-message needsclick my-5" id="isUploadText">
+                    Drag and drop your image here
+                    <small class="text-muted d-block fs-6 my-2">or</small>
+                    <span class="needsclick btn btn-outline-primary d-inline-block" id="btnBrowse">Browse image</span>
+                  </div>
+                  <div class="fallback">
+                    <input name="productImage" type="file" class="position-absolute top-0 start-0 bottom-0 end-0 opacity-0 cursor-pointer" id="basic-default-product_image" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-product_mul_image">Product Multiple Image:</label>
+              <div class="col-sm-10">
+                <div class="dropzone needsclick mb-4" id="dropzone-basic">
+                  <div class="dz-message needsclick my-5" id="isUploadTextMul">
+                    Drag and drop your image here
+                    <small class="text-muted d-block fs-6 my-2">or</small>
+                    <span class="needsclick btn btn-outline-primary d-inline-block" id="btnBrowse">Browse image</span>
+                  </div>
+                  <div class="fallback">
+                    <input name="productMulImage" multiple type="file" class="position-absolute top-0 start-0 bottom-0 end-0 opacity-0 cursor-pointer" id="basic-default-product_mul_image" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /Product Information -->
+    </div>
+    <!-- /Second column -->
+
+    
+  </div>
+</div>
+          </div>
+          <!-- / Content -->
+<script>
+  let productImg = document.getElementById("basic-default-product_image");
+  let productMulImg = document.getElementById("basic-default-product_mul_image");
+  let msg = "";
+  productImg.addEventListener("change", () => {
+    msg = "Image Uploaded Successfully <div class='my-2'></div> <span class='needsclick btn btn-outline-primary d-inline-block' id='btnBrowse'>Change image</span>";
+    document.getElementById("isUploadText").innerHTML = msg;
+  });
+  productMulImg.addEventListener("change", () => {
+    msg = "Image Uploaded Successfully <div class='my-2'></div> <span class='needsclick btn btn-outline-primary d-inline-block' id='btnBrowse'>Change image</span>";
+    document.getElementById("isUploadTextMul").innerHTML = msg;
+  });
+</script>
+<%- include('admin_footer') %>

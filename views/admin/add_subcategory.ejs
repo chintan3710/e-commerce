@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="/vendor/libs/quill/katex.css">
+<link rel="stylesheet" href="/vendor/libs/quill/editor.css">
+<link rel="stylesheet" href="/vendor/libs/select2/select2.css">
+<link rel="stylesheet" href="/vendor/libs/dropzone/dropzone.css">
+<link rel="stylesheet" href="/vendor/libs/flatpickr/flatpickr.css">
+<link rel="stylesheet" href="/vendor/libs/tagify/tagify.css" />
+
+<%- include('admin_header') %>
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+        
+          <div class="container-xxl flex-grow-1 container-p-y">
+            
+            
+
+<h4 class="py-3 mb-4">
+  <span class="text-muted fw-light">eCommerce /</span><span class="text-muted fw-light"> Subcategory /</span><span> Add Subcategory</span>
+</h4>
+
+<div class="app-ecommerce">
+
+  <!-- Add Admin -->
+
+  <div class="row">
+
+    <!-- First column-->
+    <div class="col-12 col-lg-12">
+      <!-- Product Information -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="card-tile mb-0">Subcategory information</h5>
+        </div>
+        <div class="card-body">
+          <form method="post" action="/admin/subcategory/insertSubcategoryData">
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label form-label" for="Category">Category:</label>
+                <div class="col-sm-10">
+                  <select id="Category" class="form-select form-select" name="category">
+                    <option selected="" disabled="">-- Select Category --</option>
+                        <% for(let category of categoryData){ %>
+                            <option value="<%= category.id %>"><%= category.category_name %></option>
+                        <% } %>
+                  </select>
+                </div>
+              </div>
+            <div class="row mb-3">
+              <label class="col-sm-2 col-form-label" for="basic-default-subcategory">Subcategory Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="basic-default-subcategory" placeholder="Enter Subcategory" name="subcategory_name" />
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- /Product Information -->
+    </div>
+    <!-- /Second column -->
+
+  </div>
+</div>
+          </div>
+          <!-- / Content -->
+          <script>
+            let uploadImg = document.getElementById("upload-img");
+            let msg = "";
+            uploadImg.addEventListener("change", () => {
+              msg = "Image Uploaded Successfully <div class='my-2'></div> <span class='needsclick btn btn-outline-primary d-inline-block' id='btnBrowse'>Change image</span>";
+              document.getElementById("isUploadText").innerHTML = msg;
+            });
+          </script>
+<%- include('admin_footer') %>

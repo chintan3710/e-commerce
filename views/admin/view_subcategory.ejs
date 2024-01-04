@@ -1,0 +1,109 @@
+<%- include('admin_header') %>
+
+      <!-- Content wrapper -->
+      <div class="content-wrapper">
+
+        <!-- Content -->
+        
+          <div class="container-xxl flex-grow-1 container-p-y">
+            
+            
+<h4 class="py-3 mb-4">
+  <span class="text-muted fw-light">eCommerce /</span><span class="text-muted fw-light"> Category /</span> View Subcategory
+</h4>
+
+<!-- Product List Table -->
+<div class="card">
+  <div class="card-header">
+    <form>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search By Subcategory Name" name="search" value="<%= search %>" />
+        <button class="btn btn-outline-primary waves-effect" type="submit" id="button-addon2">Search</button>
+      </div>
+    </form>
+  </div>
+  <div class="card-datatable table-responsive">
+    <table class="datatables-products table">
+      <thead class="table-light">
+        <tr>
+          <th style="font-size: unset;">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="selectAll" />
+            </label>
+          </th>
+          <th>category name</th>
+          <th>subcategory name</th>
+          <th>status</th>
+          <th>actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(subcategoryData != ""){ for(let scData of subcategoryData){ %>
+          <tr>
+            <td>
+              <label class="form-check-label me-2">
+                <input class="form-check-input checkboxSub" type="checkbox" name="mulDelete[]" value="<%= scData.id %>" />
+              </label>
+            </td>
+            <td><%= scData.category.category_name %></td>
+            <td><%= scData.subcategory_name %></td>
+            <td>
+              <% if(scData.isActive) { %>
+                <a href="/admin/subcategory/deactiveSubcategory/?id=<%= scData.id %>">
+                  <span class="btn btn-sm btn-primary" text-capitalized="">Active</span>
+                </a>
+              <% } else { %>
+                <a href="/admin/subcategory/activeSubcategory/?id=<%= scData.id %>">
+                  <span class="btn btn-sm btn-danger" text-capitalized="">Deactive</span>
+                </a>
+              <% } %>
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+                <a href="/admin/subcategory/updateSubcategory/?id=<%= scData.id %>" class="d-inline-block" data-bs-toggle="tooltip" data-bs-title="Edit Subcategory">
+                  <span class="border border-2 rounded-circle p-2">
+                    <i class="mdi mdi-pencil"></i>
+                  </span>
+                </a>
+                <a href="/admin/subcategory/deleteSubcategory/?id=<%= scData.id %>" class="d-inline-block" data-bs-toggle="tooltip" data-bs-title="Delete Subcategory">
+                  <span class="border border-2 rounded-circle p-2">
+                    <i class="mdi mdi-delete"></i>
+                  </span>
+                </a>
+            </td>
+          </tr>
+        <% } %>
+        <tr class="text-center">
+          <td colspan="10">
+              <% if(pageNo > 0){ %>
+                  <a href="?page=<%= pageNo - 1 %>&search=<%= search %>" class="btn btn-primary" style="padding: 10px 16px;" ><</a>
+              <% } %>
+              <% if(pageNo > 0){ %>
+                  <a href="?page=<%= pageNo - 1 %>&search=<%= search %>" class="btn border" style="padding: 10px 16px;" ><%= pageNo %></a>
+              <% } %>
+              <a href="?page=<%= pageNo %>&search=<%= search %>" class="btn btn-primary" style="padding: 10px 16px;" ><%= pageNo + 1 %></a>
+              <% if(totalDocument > pageNo + 1){ %>
+                  <a href="?page=<%= pageNo + 1 %>&search=<%= search %>" class="btn border" style="padding: 10px 16px;" ><%= pageNo + 2 %></a>
+              <% } %>
+              <% if(totalDocument > pageNo + 1){ %>
+                  <a href="?page=<%= pageNo + 1 %>&search=<%= search %>" class="btn btn-primary" style="padding: 10px 16px;" >></a>
+              <% } %>
+          </td>
+        </tr>
+        <% } else{ %>
+          <tr>
+            <td colspan="10" class="text-center">
+                <h3 class="my-2">Record not found</h3>
+            </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+          </div>
+          <!-- / Content -->
+
+<%- include('admin_footer') %>  

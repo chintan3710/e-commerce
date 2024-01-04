@@ -1,0 +1,110 @@
+<%- include('admin_header') %>
+
+
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Horizontal Layouts</h4> -->
+
+              <!-- Basic Layout & Basic with Icons -->
+              <div class="row">
+                <!-- Basic Layout -->
+                <div class="col-xxl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="mb-0">Add Admin</h5>
+                    </div>
+                    <div class="card-body">
+                      <form method="post" action="/admin/editAdminData" enctype="multipart/form-data">
+                        <input type="hidden" name="oldId" value="<%= adminData.id %>" />
+                        <% let [fname , lname] = adminData.name.split(' ') %>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-default-fname">First Name:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-fname" placeholder="Enter Your First Name" name="fname" value="<%= fname %>" />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-default-lname">Last Name:</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="basic-default-lname" placeholder="Enter Your Last Name" name="lname" value="<%= lname %>" />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-default-email">Email:</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <input type="text" id="basic-default-email" class="form-control" placeholder="Enter Your Email" name="email" value="<%= adminData.email %>" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-default-message">Message:</label>
+                          <div class="col-sm-10">
+                            <textarea id="basic-default-message" class="form-control" placeholder="Enter Message" rows="5" name="description"><%= adminData.description %></textarea>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label">Gender:</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <input type="radio" id="male" value="male" name="gender" style="accent-color: #9055fd; outline: none;" <% if(adminData.gender == 'male'){ %> checked <% } %> />
+                              <label class="col-form-label ms-2 me-4" for="male">Male</label>
+                              <input type="radio" id="female" value="female" name="gender" style="accent-color: #9055fd; outline: none;" <% if(adminData.gender == 'female'){ %> checked <% } %> />
+                              <label class="col-form-label ms-2" for="female">Female</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label">Hobby:</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <input type="checkbox" id="reading" value="reading" name="hobby" style="accent-color: #9055fd; outline: none;" <% if(adminData.hobby.includes('reading')){ %> checked <% } %> />
+                              <label class="col-form-label ms-2 me-4" for="reading">Reading</label>
+                              <input type="checkbox" id="music" value="music" name="hobby" style="accent-color: #9055fd; outline: none;" <% if(adminData.hobby.includes('music')){ %> checked <% } %> />
+                              <label class="col-form-label ms-2 me-4" for="music">Music</label>
+                              <input type="checkbox" id="playing" value="playing" name="hobby" style="accent-color: #9055fd; outline: none;" <% if(adminData.hobby.includes('playing')){ %> checked <% } %> />
+                              <label class="col-form-label ms-2" for="playing">Playing</label>
+                            </div>
+                          </div>
+                        </div>
+                        <% let city = ["Surat", "Ahmedabad", "Rajkot", "Gandhinagar", "Vadodara"] %>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label form-label" for="city">City:</label>
+                          <div class="col-sm-10">
+                            <select id="city" class="form-select form-select" name="city">
+                              <option selected="" disabled="">-- Select City --</option>
+                              <% city.map((v, i)=>{ %>
+                                <option value="<%= v %>" <% if(v == adminData.city){ %> selected <% } %> ><%= v %></option>
+                              <% }) %>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-sm-2 col-form-label" for="basic-default-image">Image:</label>
+                          <div class="col-sm-10">
+                            <div class="input-group input-group-merge">
+                              <input type="file" id="basic-default-image" class="form-control" name="adminImage" />
+                            </div>
+                            <img src="<%= adminData.adminImage %>" width="100" />
+                          </div>
+                        </div>
+                        <div class="row justify-content-end">
+                          <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="reset" class="btn btn-danger">Reset</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- / Content -->
+
+
+<%- include('admin_footer') %>
