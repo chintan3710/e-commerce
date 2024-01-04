@@ -92,6 +92,7 @@ module.exports.updateType = async (req, res) => {
     try {
         if (req.query.id) {
             let typeData = await Type.findById(req.query.id)
+                .populate("brand")
                 .populate("extraCategory")
                 .populate("subcategory")
                 .populate("category")
@@ -99,6 +100,7 @@ module.exports.updateType = async (req, res) => {
             let categoryData = await Category.find({});
             let subcategoryData = await Subcategory.find({});
             let extraCategoryData = await ExtraCategory.find({});
+            let brandData = await Brand.find({});
             // console.log(typeData);
             if (typeData) {
                 return res.render("admin/update_type", {
@@ -106,6 +108,7 @@ module.exports.updateType = async (req, res) => {
                     categoryData: categoryData,
                     subcategoryData: subcategoryData,
                     extraCategoryData: extraCategoryData,
+                    brandData: brandData,
                 });
             } else {
                 console.log("Data not found");
