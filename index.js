@@ -8,7 +8,20 @@ const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
 
-const db = require("./config/mongoose");
+const mongoose = require("mongoose");
+
+// const db = require("./config/mongoose");
+
+mongoose
+    .connect(
+        "mongodb+srv://chintanrajpara34:Ewk3lmreAFhscgce@cluster0.s9uyfa4.mongodb.net/e-commerce-db",
+        {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+        }
+    )
+    .then(() => console.log("Database connected."))
+    .catch((err) => console.log(err));
 
 const PassportLocal = require("./config/passport-local-strategy");
 
