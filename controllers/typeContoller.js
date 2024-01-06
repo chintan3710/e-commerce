@@ -71,7 +71,6 @@ module.exports.view_type = async (req, res) => {
         let typeData = await Type.find({
             $or: [{ type: { $regex: ".*" + search + ".*", $options: "i" } }],
         })
-            .populate("brand")
             .populate("extraCategory")
             .populate("subcategory")
             .populate("category")
@@ -92,7 +91,6 @@ module.exports.updateType = async (req, res) => {
     try {
         if (req.query.id) {
             let typeData = await Type.findById(req.query.id)
-                .populate("brand")
                 .populate("extraCategory")
                 .populate("subcategory")
                 .populate("category")
@@ -108,7 +106,6 @@ module.exports.updateType = async (req, res) => {
                     categoryData: categoryData,
                     subcategoryData: subcategoryData,
                     extraCategoryData: extraCategoryData,
-                    brandData: brandData,
                 });
             } else {
                 console.log("Data not found");
