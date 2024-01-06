@@ -71,6 +71,8 @@ module.exports.view_type = async (req, res) => {
         let typeData = await Type.find({
             $or: [{ type: { $regex: ".*" + search + ".*", $options: "i" } }],
         })
+            .limit(perPage)
+            .skip(perPage * page)
             .populate("extraCategory")
             .populate("subcategory")
             .populate("category")
