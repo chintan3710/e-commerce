@@ -57,7 +57,11 @@ app.use(express.urlencoded());
 
 app.use(express.static(path.join(__dirname, "assets")));
 
+app.use(express.static(path.join(__dirname, "user_assets")));
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use("/", require("./routes/user"));
 
 app.use("/admin", require("./routes/admin"));
 
